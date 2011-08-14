@@ -1,0 +1,19 @@
+{
+  "name": "Stable",
+  "version": "0.0.1",
+  "description": "Continuous integration server for Git projects",
+  "author": {
+      "name": "Ryan Kee",
+      "email": "me@ryankee.com"
+  },
+  "dependencies": {
+      "coffee-script": "1.1.x",
+      "optimist": "0.2.x",
+      "express":"2.4.x",
+      "stylus":"0.13.x",
+      "coffeekup":"0.3.x",
+      "colors": "0.3.x",
+      "mongodb": "0.9.x"
+  },
+  "engine": "node >= 0.4.1"
+}
