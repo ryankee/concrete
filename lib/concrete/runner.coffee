@@ -14,8 +14,8 @@ runNextJob = ->
     return no if jobs.current?
     jobs.next ->
         git.pull ->
-            runTask ->
-                jobs.currentComplete ->
+            runTask (success)->
+                jobs.currentComplete success, ->
                     runNextJob()
 
 runTask = (next)->
@@ -25,14 +25,14 @@ runTask = (next)->
             err = error.toString().replace /[\s\r\n]+$/, ''
             jobs.updateLog jobs.current, err
             console.log "#{err}".red
-            runFile git.failure, next
+            runFile git.failure, next, no
         else
             out = stdout.toString().replace /[\s\r\n]+$/, ''
             jobs.updateLog jobs.current, out
             console.log out
-            runFile git.success, next
+            runFile git.success, next, yes
 
-runFile = (file, next) ->
+runFile = (file, next, args=null) ->
     jobs.updateLog jobs.current, "Executing #{file}"
     console.log "Executing #{file}".grey
     exec file, (error, stdout, stderr)=>
@@ -44,4 +44,4 @@ runFile = (file, next) ->
             out = stdout.toString().replace /[\s\r\n]+$/, ''
             jobs.updateLog jobs.current, out
             console.log out
-        next()
+        next(args)

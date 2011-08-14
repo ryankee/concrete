@@ -1,5 +1,5 @@
 mongo = require 'mongodb'
-db = new mongo.Db 'stable', new mongo.Server('localhost', mongo.Connection.DEFAULT_PORT, {auto_reconnect: true}), {}
+db = new mongo.Db 'concrete', new mongo.Server('localhost', mongo.Connection.DEFAULT_PORT, {auto_reconnect: true}), {}
 db.open (error) ->
     console.log error if error?
 ObjectID = mongo.BSONPure.ObjectID;
@@ -43,12 +43,13 @@ jobs = module.exports =
                 collection.save(job)
                 next() if next?
                     
-    currentComplete: (next)->
+    currentComplete: (success, next)->
         db.collection 'jobs', (error, collection) ->
             collection.findOne {_id: new ObjectID jobs.current}, (error, job) ->
                 return no if not job?
                 job.running = no
                 job.finished = yes
+                job.failed = not success
                 job.finishedTime = new Date().getTime()
                 jobs.current = null
                 collection.save(job)

@@ -9,8 +9,8 @@ git = module.exports =
     runner: ''
     branch: ''
     config:
-        runner: 'stable.runner'
-        branch: 'stable.branch'
+        runner: 'concrete.runner'
+        branch: 'concrete.branch'
         
     init: (target, callback) ->
         readyCallback = callback
