@@ -16,13 +16,21 @@ jobs = module.exports =
             next() if next?
 
     getQueued: (next)->
-        getJobs({running: no}, next)
+        getJobs {running: no}, next
 
     getRunning: (next)->
-        getJobs({running: yes}, next)
+        getJobs {running: yes}, next
 
     getAll: (next)->
-        getJobs(null, next)
+        getJobs null, next
+
+    get: (id, next) ->
+        db.collection 'jobs', (error, collection) ->
+            collection.findOne {_id: new ObjectID id}, (error, job) ->
+                if job?
+                    next job
+                else
+                    next "No job found with the id '#{id}'"
 
     clear: (next)->
         db.dropCollection 'jobs', (error) ->
@@ -31,9 +39,10 @@ jobs = module.exports =
     getLog: (id, next)->
         db.collection 'jobs', (error, collection) ->
             collection.findOne {_id: new ObjectID id}, (error, job) ->
-                return no if not job?
-                log = job.log
-                next log
+                if job?
+                    next job.log
+                else
+                    next "No job found with the id '#{id}'"
     
     updateLog: (id, string, next)->
         db.collection 'jobs', (error, collection) ->

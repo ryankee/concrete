@@ -1,6 +1,7 @@
 express = require 'express'
 stylus = require 'stylus'
 fs = require 'fs'
+path = require 'path'
 runner = require './runner'
 jobs = require './jobs'
 app = module.exports = express.createServer()
@@ -14,12 +15,20 @@ app.configure ->
     app.set 'view options', {
         layout: false
     }
+    
+    # This must be BEFORE other app.use
+    app.use stylus.middleware
+        debug: false
+        src: __dirname + '/views'
+        dest: __dirname + '/public'
+        compile: (str)->
+            stylus(str).set 'compress', true
 
     app.use express.logger()
-    app.use express.bodyParser()
-    app.use express.methodOverride()
-    app.use express.cookieParser()
-    app.use express.session({secret:"concrete"})
+    # app.use express.bodyParser()
+    # app.use express.methodOverride()
+    # app.use express.cookieParser()
+    # app.use express.session({secret:"concrete"})
     app.use app.router
     app.use express.static __dirname + '/public'    
 
@@ -31,20 +40,26 @@ app.configure 'production', ->
     # app.use express.errorHandler()
 
 app.get '/', (req, res) ->
-    res.render 'index', title: 'Home!', max:12, path:req.url
-
-app.get '/taco', (req, res) ->
-    res.contentType 'json'
-    res.send {header:req.header 'host'}
+    jobs.getAll (jobs)->
+        res.render 'index',
+            project: path.basename process.cwd()
+            jobs: jobs
 
 app.get '/jobs', (req, res) ->
     jobs.getAll (jobs)->
-        res.send JSON.stringify jobs
+        res.json jobs
 
-app.get '/log/:id', (req, res) ->
-    console.log req.params.id
-    jobs.getLog req.params.id, (log)->
-        res.send log
+app.get '/job/:id', (req, res) ->
+    jobs.get req.params.id, (job) ->
+        res.json job
+
+app.get '/job/:id/:attribute', (req, res) ->
+    jobs.get req.params.id, (job) ->
+        if job[req.params.attribute]?
+            # if req.xhr...
+            res.json job[req.params.attribute]
+        else
+            res.send "The job doesn't have the #{req.params.attribute} attribute"
 
 app.get '/clear', (req, res) ->
     jobs.clear ->
@@ -56,4 +71,4 @@ app.get '/add', (req, res) ->
 
 app.post '/', (req, res) ->
     runner.build()
-    res.redirect '/jobs'
+    res.send "Build queued"

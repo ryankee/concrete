@@ -1,3 +1,19 @@
-body {
-  font: 12px Helvetica,sans-serif;
-}
+@font-face{font-family:"MenschRegular";src:url("font/mensch-wf.eot");font-weight:normal;font-style:normal}
+@font-face{font-family:"MenschBold";src:url("font/mensch-bold-wf.eot");font-weight:normal;font-style:normal}
+body{background:#fff url("../images/bg_tile.png") repeat top left;font:12px Helvetica,Arial,sans-serif}
+#content{width:960px;margin:0 auto}
+header{width:960px;margin:0 auto;margin-top:40px;padding-bottom:10px}
+h1,h2,h3{margin:0}
+h1{font:60px "MenschRegular";color:#000;margin-bottom:10px}
+.project{color:#a30e0e;float:left}
+ul{list-style-type:none;margin:40px 0;padding:0}
+.success{color:#282}
+.fail{color:#a30e0e}
+li.jobs:last-child a{border-bottom:1px solid #e6e6e6}
+li.jobs a{cursor:pointer;width:920px;height:20px;padding:20px;display:block;background-color:#eee;border-top:1px solid #e6e6e6;text-decoration:none;color:#bbb;}
+li.jobs a .job{float:left;font-size:16px;font-weight:normal;color:#666}
+li.jobs a .outcome{font:16px "MenschRegular",sans-serif;float:right}
+li.jobs a .time{font:13px "Monaco",courier,"courier new",monospace;float:left;margin-right:20px}
+li.jobs a:hover{background-color:#eaeaea}
+li.jobs .job_container{display:none;width:920px;padding:20px;background-color:#333;font:13px "Monaco",courier,"courier new",monospace;color:#ddd}
+nav{float:right}
