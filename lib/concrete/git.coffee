@@ -29,18 +29,18 @@ git = module.exports =
     pull: (next)->
         jobs = require './jobs'
         out = "Pulling '#{git.branch}' branch"
-        jobs.updateLog jobs.current, out
-        console.log out.grey
-        exec 'git pull origin ' + git.branch, (error, stdout, stderr)=>
-            if error?
-                out = "#{error}"
-                jobs.updateLog jobs.current, out
-                console.log out.red
-            else
-                out = "Updated '#{git.branch}' branch"
-                jobs.updateLog jobs.current, out
-                console.log out.grey
-                next()
+        jobs.updateLog jobs.current, out, ->
+            console.log out.grey
+            exec 'git pull origin ' + git.branch, (error, stdout, stderr)=>
+                if error?
+                    out = "#{error}"
+                    jobs.updateLog jobs.current, out
+                    console.log out.red
+                else
+                    out = "Updated '#{git.branch}' branch"
+                    jobs.updateLog jobs.current, out, ->
+                        console.log out.grey
+                        next()
 
 getBranch = ->
     exec 'git config --get ' + git.config.branch, (error, stdout, stderr)=>

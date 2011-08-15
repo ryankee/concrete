@@ -35,12 +35,13 @@ html ->
                     
         div '#content', ->
             ul ->
-                i=@jobs.length
-                for job in @jobs
+                for i in [@jobs.length - 1..0] by -1
+                    job = @jobs[i]
                     li '.jobs', ->
                         a href: "/job/#{job._id.toString()}", -> 
-                            div '.time', -> new Date(job.addedTime).toTimeString()
-                            div '.job', -> "Job #{i} - #{job._id.toString()}"
+                            d = new Date(job.addedTime)
+                            div '.time', -> "#{d.toDateString()} #{d.toTimeString()}"
+                            div '.job', -> "Job #{i+1} - #{job._id.toString()}"
                             outcomeClass = if job.failed then '.failure' else '.success'
                             div ".outcome#{outcomeClass}", ->
                                 if job.failed then '&#10008;&nbsp;failure' else '&#10003;&nbsp;success'
@@ -51,6 +52,5 @@ html ->
                                 .replace /</g, '&lt;'
                                 .replace />/g, '&gt;'
                                 .replace /\n\n/g, '\n&nbsp;\n'
-                    i--
                 li '.jobs', ->
                     div '.job_container', -> 'job holder'

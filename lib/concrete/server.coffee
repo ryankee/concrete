@@ -70,5 +70,6 @@ app.get '/add', (req, res) ->
         res.redirect '/jobs'
 
 app.post '/', (req, res) ->
-    runner.build()
-    res.send "Build queued"
+    jobs.addJob ->
+        runner.build()
+        res.redirect '/'
