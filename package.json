@@ -1,19 +1,36 @@
 {
-  "name": "Concrete",
+  "name": "concrete",
   "version": "0.0.1",
-  "description": "Continuous integration server for Git projects",
-  "author": {
-      "name": "Ryan Kee",
-      "email": "me@ryankee.com"
+  "description": "A minimalistic Continuous Integration server",
+  "author": "Ryan Kee <me@ryankee.com> (http://ryankee.com)",
+  "preferGlobal" : true,
+  "keywords": [
+    "coffeescript",
+    "continuous integration",
+    "test",
+    "coffee"
+  ],
+  "bin": {
+    "concrete": "./bin/concrete"
+  },
+  "directories" : { 
+    "bin" : "./bin",
+    "lib" : "./lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ryankee/concrete.git"
   },
   "dependencies": {
-      "coffee-script": "1.1.x",
-      "optimist": "0.2.x",
-      "express":"2.4.x",
-      "stylus":"0.13.x",
-      "coffeekup":"0.3.x",
-      "colors": "0.3.x",
-      "mongodb": "0.9.x"
+    "colors": "0.5.x",
+    "coffee-script": "1.1.x",
+    "optimist": "0.2.x",
+    "express": "2.4.x",
+    "stylus": "0.13.x",
+    "coffeekup": "0.3.x",
+    "mongodb": "0.9.x"
   },
-  "engine": "node >= 0.4.1"
+  "engines": {
+    "node": ">=0.4.9"
+  }
 }

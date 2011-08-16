@@ -8,7 +8,7 @@ h1{font:60px "MenschRegular";color:#000;margin-bottom:10px}
 .project{color:#a30e0e;float:left}
 ul{list-style-type:none;margin:40px 0;padding:0}
 .success{color:#282}
-.fail{color:#a30e0e}
+.failure{color:#a30e0e}
 li.job:last-child a{border-bottom:1px solid #e6e6e6}
 li.job a{cursor:pointer;width:920px;height:20px;padding:20px;display:block;background-color:#eee;border-top:1px solid #e6e6e6;text-decoration:none;color:#bbb;}
 li.job a .job_id{float:left;font-size:16px;font-weight:normal;color:#666}

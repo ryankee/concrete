@@ -1,15 +1,8 @@
 # Concrete
 Concrete is a minimalistic Continuous Integration server.
 
-## Installation
-Currently installation requires you to check out this repo and run a `npm install` -- soon enough it should live the npm repo
-
-    git clone git://github.com/ryankee/concrete.git
-    cd concrete
-    npm install
-    npm link
-    cd ..
-
+## Quickstart
+    npm install concrete
     git clone git://github.com/you/yourrepo.git
     concrete yourrepo
     open http://localhost:4567
