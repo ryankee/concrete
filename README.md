@@ -1,5 +1,5 @@
 # Concrete
-Concrete is a Continuous Integration server that'll run your tests on demand and report their pass/fail status.
+Concrete is a minimalistic Continuous Integration server.
 
 ## Installation
 Currently installation requires you to check out this repo and run a `npm install` -- soon enough it should live the npm repo
