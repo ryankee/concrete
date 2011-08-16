@@ -2,7 +2,7 @@
 Concrete is a minimalistic Continuous Integration server.
 
 ## Quickstart
-    npm install concrete
+    npm install -g concrete
     git clone git://github.com/you/yourrepo.git
     concrete yourrepo
     open http://localhost:4567
