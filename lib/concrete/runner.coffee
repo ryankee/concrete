@@ -23,12 +23,12 @@ runTask = (next)->
     exec git.runner, (error, stdout, stderr)=>
         if error?
             err = error.toString()
-            jobs.updateLog jobs.current, err, ->
+            jobs.updateLog jobs.current, "<span class='output error'>#{err}</span>", ->
                 console.log "#{err}".red
                 runFile git.failure, next, no
         else
             out = stdout.toString()
-            jobs.updateLog jobs.current, out, ->
+            jobs.updateLog jobs.current, "<span class='output'>#{out}</span>", ->
                 console.log out
                 runFile git.success, next, yes
 
@@ -38,11 +38,11 @@ runFile = (file, next, args=null) ->
         exec file, (error, stdout, stderr)=>
             if error?
                 err = error.toString()
-                jobs.updateLog jobs.current, err, ->
+                jobs.updateLog jobs.current, "<span class='output error'>#{err}</span>", ->
                     next(args)
                     console.log "#{err}".red
             else
                 out = stdout.toString()
-                jobs.updateLog jobs.current, out, ->
+                jobs.updateLog jobs.current, "<span class='output'>#{out}</span>", ->
                     next(args)
                     console.log out

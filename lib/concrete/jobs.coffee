@@ -8,12 +8,13 @@ jobs = module.exports =
     current: null
     addJob: (next)->
         db.collection 'jobs', (error, collection) ->
-            collection.insert
+            job =
                 addedTime: new Date().getTime()
                 log: ''
                 running: no
                 finished: no
-            next() if next?
+            collection.insert job
+            next(job) if next?
 
     getQueued: (next)->
         getJobs {running: no}, next
@@ -49,7 +50,7 @@ jobs = module.exports =
             collection.findOne {_id: new ObjectID id}, (error, job) ->
                 console.log "update log for job #{job}, #{string}"
                 return no if not job?
-                job.log += "#{string} \n"
+                job.log += "#{string} <br />"
                 collection.save(job)
                 next() if next?
                     

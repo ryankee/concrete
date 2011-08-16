@@ -70,6 +70,10 @@ app.get '/add', (req, res) ->
         res.redirect '/jobs'
 
 app.post '/', (req, res) ->
-    jobs.addJob ->
+    jobs.addJob (job)->
         runner.build()
-        res.redirect '/'
+        if req.xhr
+            console.log job
+            res.json job
+        else
+            res.redirect '/'

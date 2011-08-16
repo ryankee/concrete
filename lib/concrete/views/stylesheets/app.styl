@@ -57,7 +57,7 @@ ul
 .fail
     color #A30E0E 
 
-li.jobs
+li.job
     &:last-child
         a
             border-bottom 1px solid #E6E6E6
@@ -72,7 +72,7 @@ li.jobs
         text-decoration none
         color #BBB
         
-        .job
+        .job_id
             float: left
             font-size 16px
             font-weight normal
@@ -80,6 +80,9 @@ li.jobs
             
         .outcome
             font 16px 'MenschRegular', sans-serif
+            float right
+            
+        img.loader
             float right
             
         .time
@@ -96,7 +99,10 @@ li.jobs
         padding 20px
         background-color #333
         font 13px 'Monaco', courier, 'courier new', monospace
-        color #DDD
+        color #777
+        
+        span.output
+            color #DDD
         
 nav
     float right
