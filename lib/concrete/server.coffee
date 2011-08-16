@@ -24,6 +24,11 @@ app.configure ->
         compile: (str)->
             stylus(str).set 'compress', true
 
+    coffeeDir = __dirname + '/views'
+    publicDir = __dirname + '/public'
+    app.use express.compiler src: coffeeDir, dest: publicDir, enable: ['coffeescript']
+    # app.use express.static publicDir
+    
     app.use express.logger()
     # app.use express.bodyParser()
     # app.use express.methodOverride()
