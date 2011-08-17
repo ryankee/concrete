@@ -47,6 +47,8 @@ $(document).ready ->
         closeAll()
         $('button.build').hide()
         $.post '/', (data) ->
+            if $('ul.jobs').find('li.nojob').length > 0
+               $('ul.jobs').find('li.nojob').first().remove() 
             job = $('ul.jobs').prepend CoffeeKup.render jobTemplate, job: data
             job = $(job).find('li').first()
             addClick job

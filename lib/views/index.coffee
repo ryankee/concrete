@@ -20,6 +20,8 @@ html ->
                     
         div '#content', ->
             ul '.jobs', ->
+                if @jobs.length is 0
+                    li '.nojob', -> 'No jobs have been submitted.'
                 for i in [@jobs.length - 1..0] by -1
                     @job = @jobs[i]
                     partial 'jobPartial'

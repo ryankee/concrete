@@ -1,5 +1,6 @@
 mongo = require 'mongodb'
-db = new mongo.Db 'concrete', new mongo.Server('localhost', mongo.Connection.DEFAULT_PORT, {auto_reconnect: true}), {}
+path = require 'path'
+db = new mongo.Db "concrete_#{path.basename process.cwd()}", new mongo.Server('localhost', mongo.Connection.DEFAULT_PORT, {auto_reconnect: true}), {}
 db.open (error) ->
     console.log error if error?
 ObjectID = mongo.BSONPure.ObjectID;
