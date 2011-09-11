@@ -1,6 +1,8 @@
 # Concrete
 Concrete is a minimalistic Continuous Integration server.
 
+![concrete](http://dl.dropbox.com/u/1152970/concrete_screenshot_hi.png)
+
 ## Quickstart
     npm install -g concrete
     git clone git://github.com/you/yourrepo.git
