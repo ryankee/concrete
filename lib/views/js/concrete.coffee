@@ -19,7 +19,7 @@ $(document).ready ->
                 return false
             setTimeout ->
                 updateJob job
-            , 100
+            , 1000
         , 'json'
     
     outcomeTemplate = ->
@@ -46,6 +46,7 @@ $(document).ready ->
     $('button.build').click (event) ->
         closeAll()
         $('button.build').hide()
+        $('li.nojob').hide()
         $.post '/', (data) ->
             if $('ul.jobs').find('li.nojob').length > 0
                $('ul.jobs').find('li.nojob').first().remove() 

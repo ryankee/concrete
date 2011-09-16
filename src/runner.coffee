@@ -20,7 +20,7 @@ runNextJob = ->
 
 runTask = (next)->
     jobs.updateLog jobs.current, "Executing '#{git.runner}'"
-    exec git.runner, (error, stdout, stderr)=>
+    exec git.runner,{maxBuffer: 1024*1024}, (error, stdout, stderr)=>
         if error?
             err = error.toString()
             jobs.updateLog jobs.current, "<span class='output error'>#{err}</span>", ->

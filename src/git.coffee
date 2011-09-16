@@ -14,10 +14,10 @@ git = module.exports =
         
     init: (target, callback) ->
         readyCallback = callback
-        git.target = target+'.git/'
-        git.failure = target+'.git/hooks/build-failed'
-        git.success = target+'.git/hooks/build-worked'
         path = require 'path'
+        git.target = path.normalize target+'/.git/'
+        git.failure = path.normalize target+'/.git/hooks/build-failed'
+        git.success = path.normalize target+'/.git/hooks/build-worked'
         path.exists git.target, (exists)->
             if exists is no
                 console.log "'#{target}' is not a valid Git repo".red
@@ -43,19 +43,20 @@ git = module.exports =
                         next()
 
 getBranch = ->
+    console.log process.cwd()
     exec 'git config --get ' + git.config.branch, (error, stdout, stderr)=>
         if error?
-            console.log "#{error}".red
-            process.exit 1
+            git.branch = 'master'
+            gitContinue()
         else
             git.branch = stdout.toString().replace /[\s\r\n]+$/, ''
-            git.branch = 'none' if git.branch is ''
+            git.branch = 'master' if git.branch is ''
             gitContinue()
 
 getRunner = ->
     exec 'git config --get ' + git.config.runner, (error, stdout, stderr)=>
         if error?
-            console.log "#{error}".red
+            console.log "Git.getRunner: #{error}".red
             process.exit 1
         else
             git.runner = stdout.toString().replace /[\s\r\n]+$/, ''
@@ -69,8 +70,8 @@ gitContinue = ->
         return no
 
     if git.runner is 'none'
-        console.log 'You must specify a Git runner'.red
+        console.log 'Git.gitContinue: You must specify a Git runner'.red
         process.exit 1
     else if git.runner is ''
-        return no        
+        return no
     readyCallback()

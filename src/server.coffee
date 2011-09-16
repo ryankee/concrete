@@ -8,7 +8,7 @@ app = module.exports = express.createServer()
 
 app.configure ->
     app.set 'views', __dirname + '/views'
-
+    app.set 'quiet', yes
     # use coffeekup for html markup
     app.set 'view engine', 'coffee'
     app.register '.coffee', require('coffeekup').adapters.express
