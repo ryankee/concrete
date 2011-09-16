@@ -15,6 +15,9 @@ git = module.exports =
     init: (target, callback) ->
         readyCallback = callback
         path = require 'path'
+        if target.toString().charAt(0) isnt '/'
+            target = process.cwd()+'/'+target
+        process.chdir target
         git.target = path.normalize target+'/.git/'
         git.failure = path.normalize target+'/.git/hooks/build-failed'
         git.success = path.normalize target+'/.git/hooks/build-worked'
@@ -22,7 +25,6 @@ git = module.exports =
             if exists is no
                 console.log "'#{target}' is not a valid Git repo".red
                 process.exit 1
-            process.chdir target
             getBranch()
             getRunner()
         
@@ -43,7 +45,6 @@ git = module.exports =
                         next()
 
 getBranch = ->
-    console.log process.cwd()
     exec 'git config --get ' + git.config.branch, (error, stdout, stderr)=>
         if error?
             git.branch = 'master'

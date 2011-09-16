@@ -1,5 +1,5 @@
 process.title = 'Concrete'
-version = '0.0.1'
+version = '0.0.2'
 
 # cli colors
 colors = require 'colors'

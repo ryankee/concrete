@@ -27,22 +27,16 @@ app.configure ->
     coffeeDir = __dirname + '/views'
     publicDir = __dirname + '/public'
     app.use express.compiler src: coffeeDir, dest: publicDir, enable: ['coffeescript']
-    # app.use express.static publicDir
     
     app.use express.logger()
-    # app.use express.bodyParser()
-    # app.use express.methodOverride()
-    # app.use express.cookieParser()
-    # app.use express.session({secret:"concrete"})
     app.use app.router
-    app.use express.static __dirname + '/public'    
+    app.use express.static __dirname + '/public'
 
 app.configure 'development', ->
     app.use express.errorHandler dumpExceptions: on, showStack: on
 
 app.configure 'production', ->
     app.use express.errorHandler dumpExceptions: on, showStack: on
-    # app.use express.errorHandler()
 
 app.get '/', (req, res) ->
     jobs.getAll (jobs)->
