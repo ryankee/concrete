@@ -2,10 +2,11 @@ mongo = require 'mongodb'
 path = require 'path'
 db = new mongo.Db "concrete_#{path.basename process.cwd()}", new mongo.Server('localhost', mongo.Connection.DEFAULT_PORT, {auto_reconnect: true}), {}
 db.open (error) ->
-    console.log error if error?
-ObjectID = mongo.BSONPure.ObjectID;
+    console.log 'There was an error creating a connection with the Mongo database. Please check that MongoDB is properly installed and running.'.red
+    process.exit 1
+ObjectID = mongo.BSONPure.ObjectID
 
-jobs = module.exports = 
+jobs = module.exports =
     current: null
     addJob: (next)->
         db.collection 'jobs', (error, collection) ->

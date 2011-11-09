@@ -28,7 +28,7 @@ optimist = require 'optimist'
 
 # check if all our settings are good to go
 if argv.help
-    optimist.showHelp() 
+    optimist.showHelp()
     process.exit 1
 
 # list the version
@@ -43,7 +43,7 @@ if argv._.length == 0
     process.exit 1
 
 # start server command
-startServer = ->    
+startServer = ->
     # start the server
     server = require '../lib/server'
     server.listen argv.p, argv.h
