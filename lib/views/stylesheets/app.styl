@@ -55,7 +55,16 @@ ul
     color #228822
 
 .failure
-    color #A30E0E 
+    color #A30E0E
+
+code
+  pre
+    font 13px 'Monaco', courier, 'courier new', monospace
+    span
+      &.bold { font-weight: bold; }
+      &.underscore { text-decoration: underscore; }
+      &.fg-red { color: #dc322f; }
+      &.fg-green { color: #859900; }
 
 li.job
     &:last-child
