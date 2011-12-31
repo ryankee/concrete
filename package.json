@@ -1,6 +1,6 @@
 {
   "name": "concrete",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A minimalistic Continuous Integration server",
   "author": "Ryan Kee <me@ryankee.com> (http://ryankee.com)",
   "preferGlobal" : true,
@@ -22,11 +22,11 @@
     "url": "git://github.com/ryankee/concrete.git"
   },
   "dependencies": {
-    "colors": "0.5.x",
-    "coffee-script": "1.1.x",
-    "optimist": "0.2.x",
-    "express": "2.4.x",
-    "stylus": "0.13.x",
+    "colors": "0.6.x",
+    "coffee-script": "1.2.x",
+    "optimist": "0.3.x",
+    "express": "2.x",
+    "stylus": "0.x",
     "coffeekup": "0.3.x",
     "mongodb": "0.9.x"
   },

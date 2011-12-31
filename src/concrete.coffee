@@ -1,5 +1,5 @@
 process.title = 'Concrete'
-version = '0.0.2'
+version = '0.0.3'
 
 # cli colors
 colors = require 'colors'
@@ -48,7 +48,7 @@ startServer = ->
     server = require '../lib/server'
     server.listen argv.p, argv.h
     console.log "Concrete listening on port %d with host %s".green,
-        server.address().port, server.address().address
+        argv.p, argv.h
 
 # check the path and start the git request
 git = require '../lib/git'
