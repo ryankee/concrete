@@ -1,5 +1,5 @@
 li '.job', ->
-    a href: "/job/#{@job._id.toString()}", -> 
+    a href: "/job/#{@job._id.toString()}", ->
         d = new Date(@job.addedTime)
         div '.time', -> "#{d.toDateString()} #{d.toTimeString()}"
         div '.job_id', -> "#{@job._id.toString()}"
