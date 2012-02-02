@@ -17,7 +17,7 @@ html ->
                 nav ->
                     form method: 'post', action: '/', ->
                         button '.build', -> 'Build'
-                    
+
         div '#content', ->
             ul '.jobs', ->
                 if @jobs.length is 0
