@@ -39,7 +39,7 @@ jobs = module.exports =
     clear: (next)->
         db.dropCollection 'jobs', (error) ->
             next() if next?
-                
+
     getLog: (id, next)->
         db.collection 'jobs', (error, collection) ->
             collection.findOne {_id: new ObjectID id}, (error, job) ->
@@ -47,7 +47,7 @@ jobs = module.exports =
                     next job.log
                 else
                     next "No job found with the id '#{id}'"
-    
+
     updateLog: (id, string, next)->
         db.collection 'jobs', (error, collection) ->
             collection.findOne {_id: new ObjectID id}, (error, job) ->
@@ -56,7 +56,7 @@ jobs = module.exports =
                 job.log += "#{string} <br />"
                 collection.save(job)
                 next() if next?
-                    
+
     currentComplete: (success, next)->
         db.collection 'jobs', (error, collection) ->
             collection.findOne {_id: new ObjectID jobs.current}, (error, job) ->
