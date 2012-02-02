@@ -13,18 +13,16 @@ git = module.exports =
     config:
         runner: 'concrete.runner'
         branch: 'concrete.branch'
-    
-    # init at target directory    
+
+    # init at target directory
     init: (target, callback) ->
         # save callback for after git is ready to go
         readyCallback = callback
 
-        # we're using node's path to
-        # run directory level operations
+        # we're using node's path to run directory level operations
         path = require 'path'
 
-        # get the full path to the target and change
-        # the process to that directory
+        # get the full path to target and change the process to that directory
         if target.toString().charAt(0) isnt '/'
             target = process.cwd()+'/'+target
         process.chdir target
@@ -33,7 +31,7 @@ git = module.exports =
         git.target = path.normalize target+'/.git/'
         git.failure = path.normalize target+'/.git/hooks/build-failed'
         git.success = path.normalize target+'/.git/hooks/build-worked'
-        
+
         # make sure the path exists and is a valid repo
         path.exists git.target, (exists)->
             if exists is no
@@ -41,7 +39,7 @@ git = module.exports =
                 process.exit 1
             getBranch()
             getRunner()
-    
+
     # pull from the git repo
     pull: (next)->
         # get the job list so we can queue jobs
@@ -83,8 +81,7 @@ getRunner = ->
             git.runner = 'none' if git.runner is ''
             gitContinue()
 
-# notify the user of any issue prior
-# to continuing the concrete operation            
+# notify the user of any issue prior to continuing the concrete operation
 gitContinue = ->
     if git.branch is 'none'
         git.branch = 'master'

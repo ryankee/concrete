@@ -1,6 +1,6 @@
 {print} = require 'sys'
 {spawn} = require 'child_process'
-task 'build', 'Compilie coffeescript files', (options)->
+task 'build', 'Compile CoffeeScript files', (options)->
     options = ['-c', '-o', 'lib', 'src']
     coffee = spawn 'coffee', options
     coffee.stdout.on 'data', (data) -> print data.toString()
