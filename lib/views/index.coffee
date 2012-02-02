@@ -5,10 +5,10 @@ html ->
         title "#{if @title then @title+' - ' else ''}Concrete"
         meta(name: 'description', content: @desc) if @desc?
         link rel: 'stylesheet', href: 'stylesheets/app.css'
-        script src: '/js/jquery-1.6.2.min.js'
-        script src: '/js/coffeekup.js'
-        script src: '/concrete.js'
-                
+        script src: 'js/jquery-1.6.2.min.js'
+        script src: 'js/coffeekup.js'
+        script src: 'concrete.js'
+
     body ->
         header ->
             hgroup ->
