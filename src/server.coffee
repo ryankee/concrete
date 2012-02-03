@@ -15,8 +15,8 @@ app.configure ->
     app.set 'view options', {
         layout: false
     }
-    
-    # This must be BEFORE other app.use
+
+    # this must be BEFORE other app.use
     app.use stylus.middleware
         debug: false
         src: __dirname + '/views'
@@ -27,7 +27,7 @@ app.configure ->
     coffeeDir = __dirname + '/views'
     publicDir = __dirname + '/public'
     app.use express.compiler src: coffeeDir, dest: publicDir, enable: ['coffeescript']
-    
+
     app.use express.logger()
     app.use app.router
     app.use express.static __dirname + '/public'
