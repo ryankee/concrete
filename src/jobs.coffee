@@ -28,6 +28,15 @@ jobs = module.exports =
     getAll: (next)->
         getJobs null, next
 
+    getLast: (next)->
+        db.collection 'jobs', (error, collection) ->
+            collection.find().sort({$natural:-1}).limit(1).toArray (error, jobs) ->
+                if jobs.length > 0
+                    next jobs[0]
+                else
+                    next()
+            
+
     get: (id, next) ->
         db.collection 'jobs', (error, collection) ->
             collection.findOne {_id: new ObjectID id}, (error, job) ->
