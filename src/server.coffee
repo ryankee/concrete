@@ -68,6 +68,13 @@ app.get '/add', (req, res) ->
     jobs.addJob ->
         res.redirect '/jobs'
 
+app.get '/ping', (req, res) ->
+    jobs.getLast (job) ->
+        if job.failed
+            res.send(412)
+        else
+            res.send(200)
+
 app.post '/', (req, res) ->
     jobs.addJob (job)->
         runner.build()
