@@ -56,14 +56,12 @@ runTask = (next)->
     jobs.updateLog jobs.current, "Executing '#{git.runner}'"
     exec git.runner,{maxBuffer: 1024*1024}, (error, stdout, stderr)=>
         if error?
-            err = html tokenize error.toString()
-            jobs.updateLog jobs.current, "<span class='output error'>#{err}</span>", ->
-                console.log "#{err}".red
-                runFile git.failure, next, no
+            updateLog error, true, ->
+                updateLog stdout, true, ->
+                    updateLog stderr, true, ->
+                        runFile git.failure, next, no
         else
-            out = html tokenize stdout.toString()
-            jobs.updateLog jobs.current, "<span class='output'>#{out}</span>", ->
-                console.log out
+            updateLog stdout, true, ->
                 runFile git.success, next, yes
 
 runFile = (file, next, args=null) ->
@@ -71,12 +69,20 @@ runFile = (file, next, args=null) ->
         console.log "Executing #{file}".grey
         exec file, (error, stdout, stderr)=>
             if error?
-                err = html tokenize error.toString()
-                jobs.updateLog jobs.current, "<span class='output error'>#{err}</span>", ->
-                    next(args)
-                    console.log "#{err}".red
+                updateLog error, true, ->
+                    updateLog stdout, true, ->
+                        updateLog stderr, true, ->
+                            next(args)
             else
-                out = html tokenize stdout.toString()
-                jobs.updateLog jobs.current, "<span class='output'>#{out}</span>", ->
+                updateLog stdout, true, ->
                     next(args)
-                    console.log out
+
+updateLog = (buffer, isError, done) ->
+    content = html tokenize buffer.toString()
+    if isError
+        errorClass = ' error'
+        console.log "#{content}".red
+    else
+        errorClass = ''
+        console.log content
+    jobs.updateLog jobs.current, "<span class='output#{errorClass}'>#{content}</span>", done
