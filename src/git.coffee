@@ -10,9 +10,13 @@ readyCallback = null
 git = module.exports =
     runner: ''
     branch: ''
+    user: ''
+    pass: ''
     config:
         runner: 'concrete.runner'
         branch: 'concrete.branch'
+        user: 'concrete.user'
+        pass: 'concrete.pass'
 
     # init at target directory
     init: (target, callback) ->
@@ -37,6 +41,8 @@ git = module.exports =
             if exists is no
                 console.log "'#{target}' is not a valid Git repo".red
                 process.exit 1
+            getUser()
+            getPass()
             getBranch()
             getRunner()
 
@@ -57,6 +63,20 @@ git = module.exports =
                     jobs.updateLog jobs.current, out, ->
                         console.log out.grey
                         next()
+
+getUser = ->
+    exec 'git config --get ' + git.config.user, (error, stdout, stderr)=>
+        if error?
+            git.user = ''
+        else
+            git.user = stdout.toString().replace /[\s\r\n]+$/, ''
+
+getPass = ->
+    exec 'git config --get ' + git.config.pass, (error, stdout, stderr)=>
+        if error?
+            git.pass = ''
+        else
+            git.pass = stdout.toString().replace /[\s\r\n]+$/, ''
 
 # get the current working branch
 # fallback to master if git.config.branch isn't set

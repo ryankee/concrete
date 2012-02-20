@@ -4,7 +4,15 @@ fs = require 'fs'
 path = require 'path'
 runner = require './runner'
 jobs = require './jobs'
-app = module.exports = express.createServer()
+git = require './git'
+
+authorize = (user, pass) ->
+    user == git.user and pass == git.pass
+
+if git.user and git.pass
+    app = module.exports = express.createServer(express.basicAuth(authorize))
+else
+    app = module.exports = express.createServer()
 
 app.configure ->
     app.set 'views', __dirname + '/views'

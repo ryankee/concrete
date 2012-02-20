@@ -26,6 +26,10 @@ Concrete is a minimalistic Continuous Integration server.
 ## Setting the branch
     git config --add concrete.branch deploy
 
+## Adding HTTP Basic authentication
+    git config --add concrete.user username
+    git config --add concrete.pass password
+
 ## Post build
 After building Concrete will run `.git/hooks/build-failed` or `.git/hooks/build-worked` depending on test outcome. Like all git hooks, they're just shell scripts so put whatever you want in there.
 
