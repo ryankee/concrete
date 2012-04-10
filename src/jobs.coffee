@@ -91,8 +91,8 @@ jobs = module.exports =
 getJobs = (filter, next)->
     db.collection 'jobs', (error, collection) ->
         if filter?
-            collection.find(filter).toArray (error, results) ->
+            collection.find(filter).sort({addedTime: 1}).toArray (error, results) ->
                 next results
         else
-            collection.find().toArray (error, results) ->
+            collection.find().sort({addedTime: 1}).toArray (error, results) ->
                 next results
