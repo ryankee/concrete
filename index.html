@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Concrete by ryankee</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Concrete</h1>
+        <p>Simple continuous integration server written with NodeJS and CoffeeScript</p>
+        <p class="view"><a href="https://github.com/ryankee/concrete">View the Project on GitHub <small>ryankee/concrete</small></a></p>
+        <ul>
+          <li><a href="https://github.com/ryankee/concrete/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ryankee/concrete/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ryankee/concrete">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p><img src="http://dl.dropbox.com/u/1152970/concrete_screenshot_hi.png" alt="concrete"></p>
+
+<h2>Quickstart</h2>
+
+<pre><code>npm install -g concrete
+git clone git://github.com/you/yourrepo.git
+cd yourrepo
+git config --add concrete.runner "coffee test/unit.coffee"
+concrete .
+open http://localhost:4567
+</code></pre>
+
+<h2>Usage</h2>
+
+<pre><code>Usage: concrete [-hpv] path_to_git_repo
+
+Options:
+  -h, --host     The hostname or ip of the host to bind to  [default: "0.0.0.0"]
+  -p, --port     The port to listen on                      [default: 4567]
+  --help         Show this message
+  -v, --version  Show version
+</code></pre>
+
+<h2>Setting the test runner</h2>
+
+<pre><code>git config --add concrete.runner "coffee test/unit.coffee"
+</code></pre>
+
+<h2>Setting the branch</h2>
+
+<pre><code>git config --add concrete.branch deploy
+</code></pre>
+
+<h2>Adding HTTP Basic authentication</h2>
+
+<pre><code>git config --add concrete.user username
+git config --add concrete.pass password
+</code></pre>
+
+<h2>Post build</h2>
+
+<p>After building Concrete will run <code>.git/hooks/build-failed</code> or <code>.git/hooks/build-worked</code> depending on test outcome. Like all git hooks, they're just shell scripts so put whatever you want in there.</p>
+
+<p>Concrete is <strong>heavily</strong> inspired by <a href="https://github.com/defunkt/cijoe">CI Joe</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/ryankee">ryankee</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-30889677-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
