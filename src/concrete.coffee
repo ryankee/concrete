@@ -13,6 +13,11 @@ optimist = require 'optimist'
             describe: "The hostname or ip of the host to bind to",
             default: '0.0.0.0'
         })
+        .options('d', {
+          alias: 'basedir',
+          describe: "Application base path for mounted instances",
+          default: "/"
+        })
         .options('p', {
             alias: 'port',
             describe: "The port to listen on",
@@ -45,10 +50,11 @@ if argv._.length == 0
 # start server command
 startServer = ->
     # start the server
+    global.currentNamespace = argv.d
     server = require '../lib/server'
     server.listen argv.p, argv.h
-    console.log "Concrete listening on port %d with host %s".green,
-        argv.p, argv.h
+    console.log "Concrete listening on port %d with host %s in directory %s".green,
+        argv.p, argv.h, argv.d
 
 # check the path and start the git request
 git = require '../lib/git'
