@@ -53,7 +53,7 @@ git = module.exports =
         out = "Pulling '#{git.branch}' branch"
         jobs.updateLog jobs.current, out, ->
             console.log out.grey
-            exec 'git pull origin ' + git.branch, (error, stdout, stderr)=>
+            exec 'git fetch && git reset --hard origin/' + git.branch, (error, stdout, stderr)=>
                 if error?
                     out = "#{error}"
                     jobs.updateLog jobs.current, out
