@@ -1,6 +1,6 @@
 mongo = require 'mongodb'
 path = require 'path'
-db = new mongo.Db "concrete_#{path.basename process.cwd()}", new mongo.Server('localhost', mongo.Connection.DEFAULT_PORT, {auto_reconnect: true}), {}
+db = new mongo.Db "concrete_#{path.basename(process.cwd()).replace(/\./, "-")}", new mongo.Server('localhost', mongo.Connection.DEFAULT_PORT, {auto_reconnect: true}), {}
 db.open (error) ->
     if error
       console.log 'There was an error creating a connection with the Mongo database. Please check that MongoDB is properly installed and running.'.red
