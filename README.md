@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/ryankee/concrete.png)](http://travis-ci.org/ryankee/concrete)
 # Concrete
 Concrete is a minimalistic Continuous Integration server.
 
