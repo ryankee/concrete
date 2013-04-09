@@ -1,0 +1,49 @@
+{
+  "name": "concrete",
+  "description": "A minimalistic continuous integration server",
+  "version": "1.0.0",
+  "homepage": "https://github.com/ryankee/concrete",
+  "author": {
+    "name": "Ryan Kee",
+    "email": "me@ryankee.com",
+    "url": "http://ryankee.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ryankee/concrete.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ryankee/concrete/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ryankee/concrete/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "bin/concrete",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.2.0",
+    "grunt-contrib-watch": "~0.3.1",
+    "grunt-jasmine-node": "0.0.6",
+    "jasmine-node": "~1.5.0",
+    "grunt-exec": "~0.4.0"
+  },
+  "keywords": [
+    "continuous integration",
+    "continuous",
+    "integration",
+    "ci",
+    "test"
+  ],
+  "dependencies": {
+    "express": "~3.1.1"
+  }
+}

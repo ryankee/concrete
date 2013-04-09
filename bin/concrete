@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+// setup defaults
+var options = {
+  host:'0.0.0.0',
+  port:'4567',
+};
+
+// set help message
+var help = [
+  'Usage: concrete [options]',
+  '',
+  'Options:',
+  '  -h, --host    The hostname or ip to bind [default: '+options.host+']',
+  '  -p, --port    The port to listen on      [default: '+options.port+']',
+  '  --help        Show this message',
+].join('\n');
+
+// parse arguments
+var arg, argv = process.argv.slice(2);
+while (arg = argv.shift()){
+  arg = arg.match(/^--?(.+)/)[1];
+
+  switch(arg){
+    case 'h':
+    case 'host':
+      options.host = argv.shift();
+      break;
+    case 'p':
+    case 'port':
+      options.port = argv.shift();
+      break;
+    case 'help':
+      console.log(help);
+      process.exit(0);
+      break;
+  }
+}
+
+// execute
+var server = require('../lib/server');
+console.log('Starting concrete at ' + options.host + ':' + options.port);
+server.start(options.port, options.host);
