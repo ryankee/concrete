@@ -4,8 +4,14 @@ module.exports = (function(){
       http = require('http'),
       server;
   
+  // point to lib for views
+  app.settings.views = __dirname + '/views';
+  
+  // set ejs engine
+  app.engine('html', require('ejs').renderFile);
+  
   app.get('/', function(req, res){
-    res.send('concrete');
+    res.render('index.html');
   });
 
   return {

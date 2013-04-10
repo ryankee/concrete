@@ -38,6 +38,6 @@ while (arg = argv.shift()){
 }
 
 // execute
-var server = require('../lib/server');
+var server = require('../app/server/server');
 console.log('Starting concrete at ' + options.host + ':' + options.port);
 server.start(options.port, options.host);

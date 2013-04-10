@@ -3,7 +3,7 @@ var exec = require('child_process').exec;
 describe('Server', function() {
   var server;
   beforeEach(function() {
-    server = require('../lib/server');
+    server = require('../app/server/server');
   });
 
   it('can be imported', function() {
