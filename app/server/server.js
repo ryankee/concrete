@@ -1,8 +1,23 @@
 module.exports = (function(){
   var express = require('express'),
       app = express(),
+      assets = require('connect-assets'),
       http = require('http'),
+      livereload = require('express-livereload'),
       server;
+  
+  if(app.get('env') === 'development'){
+    livereload(app, {
+      watchDir:process.cwd() + "/app"
+    });
+  }
+
+  // configure assets
+  app.use(assets({
+    src:'app/client'
+  }));
+  css.root = 'styles';
+  js.root  = '';
   
   // point to lib for views
   app.settings.views = __dirname + '/views';
@@ -11,9 +26,12 @@ module.exports = (function(){
   app.engine('html', require('ejs').renderFile);
   
   app.get('/', function(req, res){
-    res.render('index.html');
+    res.render('index.html', {
+      env:app.get('env')
+    });
   });
-
+      
+  
   return {
     start: function(port, host){
       server = http.createServer(app).listen(port, host);

@@ -2,9 +2,30 @@
 <html>
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <%- css('app') %>
   <title>Concrete</title>
 </head>
 <body>
-  <h1>Welcome to concrete</h1>
+
+  <!--<script type="text/x-handlebars">-->
+  <section id="sidebar">
+    <ul>
+      <li class="settings icon-cog"></li>
+      <li>P</li>
+      <li>C</li>
+    </ul>
+  </section>
+  <!--</script>-->
+
+  <script type="text/x-handlebars" id="_nav">
+    <h1>Sup</h1>
+  </script>
+
+
+  <%- js('app') %>
+  <%if (env === 'development') { %>
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')</script>
+  <% } %>
+  
 </body>
 </html>
