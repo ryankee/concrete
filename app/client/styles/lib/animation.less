@@ -83,3 +83,10 @@
     transform: rotate(359deg);
   }
 }
+
+.transition(@prop:all, @speed:0.3s, @ease:ease-out){
+  -webkit-transition: @prop @speed @ease;
+     -moz-transition: @prop @speed @ease;
+       -o-transition: @prop @speed @ease;
+          transition: @prop @speed @ease;
+}

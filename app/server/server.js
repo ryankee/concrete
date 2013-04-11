@@ -19,6 +19,9 @@ module.exports = (function(){
   css.root = 'styles';
   js.root  = '';
   
+  // other statics
+  app.use(express.static('app/client'));
+  
   // point to lib for views
   app.settings.views = __dirname + '/views';
   
