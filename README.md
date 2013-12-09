@@ -6,6 +6,9 @@ Concrete is a minimalistic Continuous Integration server.
 _Note: I don't have a lot of time to maintain, so I'm looking for folks who'd like to contribute. Post an issue if you'd like to toss some time towards new features, issues, or pull requests._
 
 ## Quickstart
+
+> Note: This project requires a MongoDB instance
+
     npm install -g concrete
     git clone git://github.com/you/yourrepo.git
     cd yourrepo
