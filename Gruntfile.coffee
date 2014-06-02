@@ -5,20 +5,31 @@ module.exports = (grunt) ->
     watch:
       coffee:
         files: ['src/**/*.coffee']
-        tasks: ['coffee']
+        tasks: ['coffee:server']
+
+      stylus:
+        files: ['src/views/stylesheets/app.styl']
+        tasks: ['stylus:compile']
 
     coffee:
       server:
         expand: true
         flatten: false
         cwd: 'src/'
-        src: ['**/*.coffee']
+        src: ['**/*.coffee','!views/**/*']
         dest: 'lib/'
         ext: '.js'
 
+    stylus:
+      compile:
+        files:
+          'lib/public/stylesheets/app.css': ['src/views/stylesheets/app.styl']
+
+
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-contrib-stylus'
 
   grunt.registerTask 'default', ['build', 'watch']
 
-  grunt.registerTask 'build', ['coffee']
+  grunt.registerTask 'build', ['coffee', 'stylus']
