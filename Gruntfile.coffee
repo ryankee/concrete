@@ -30,6 +30,14 @@ module.exports = (grunt) ->
           'lib/public/stylesheets/app.css': ['src/views/stylesheets/app.styl']
 
     copy:
+      statics:
+        files: [
+          expand: true
+          flatten: false
+          cwd: 'statics/'
+          src: ['**/*']
+          dest: 'lib/public/'
+        ]
       views:
         files:
           'lib/views/index.coffee': ['src/views/index.coffee']
