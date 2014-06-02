@@ -39,6 +39,7 @@
     "grunt-contrib-coffee": "^0.10.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-contrib-stylus": "^0.16.0",
-    "grunt-contrib-copy": "^0.5.0"
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-jasmine-bundle": "^0.2.0"
   }
 }

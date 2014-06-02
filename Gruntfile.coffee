@@ -47,6 +47,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-stylus'
   grunt.loadNpmTasks 'grunt-contrib-copy'
+  grunt.loadNpmTasks 'grunt-jasmine-bundle'
 
   grunt.registerTask 'default', ['build', 'watch']
 
