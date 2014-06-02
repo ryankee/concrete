@@ -2,7 +2,10 @@ mongo = require 'mongodb'
 path = require 'path'
 dbName = path.basename(process.cwd()).replace(/\./, "-")
 
-db = new mongo.Db "concrete_#{ dbName }", new mongo.Server('localhost', mongo.Connection.DEFAULT_PORT, {auto_reconnect: true}), {}
+dbHost = process.env.MONGODB_HOST || 'localhost'
+dbPort = process.env.MONGODB_PORT || mongo.Connection.DEFAULT_PORT
+
+db = new mongo.Db "concrete_#{ dbName }", new mongo.Server(dbHost, dbPort, {auto_reconnect: true}), {}
 db.open (error) ->
     if error
       console.log 'There was an error creating a connection with the Mongo database. Please check that MongoDB is properly installed and running.'.red
