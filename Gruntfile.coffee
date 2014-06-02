@@ -29,11 +29,17 @@ module.exports = (grunt) ->
         files:
           'lib/public/stylesheets/app.css': ['src/views/stylesheets/app.styl']
 
+    copy:
+      views:
+        files:
+          'lib/views/index.coffee': ['src/views/index.coffee']
+          'lib/views/jobPartial.coffee': ['src/views/jobPartial.coffee']
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-stylus'
+  grunt.loadNpmTasks 'grunt-contrib-copy'
 
   grunt.registerTask 'default', ['build', 'watch']
 
-  grunt.registerTask 'build', ['coffee', 'stylus']
+  grunt.registerTask 'build', ['coffee', 'stylus', 'copy']
