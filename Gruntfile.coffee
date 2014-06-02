@@ -11,6 +11,10 @@ module.exports = (grunt) ->
         files: ['src/views/stylesheets/app.styl']
         tasks: ['stylus:compile']
 
+      spec:
+        files: ['src/**/*.coffee','!src/views/**/*.coffee']
+        tasks: ['spec:default']
+
     coffee:
       server:
         expand: true
@@ -49,6 +53,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-jasmine-bundle'
 
-  grunt.registerTask 'default', ['build', 'watch']
+  grunt.registerTask 'default', ['spec:default', 'build', 'watch']
 
   grunt.registerTask 'build', ['coffee', 'stylus', 'copy']
