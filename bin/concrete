@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-module.exports = require('../lib/concrete')
+module.exports = require('../dist/concrete')

@@ -51,11 +51,11 @@ if argv._.length == 0
 startServer = ->
     # start the server
     global.currentNamespace = argv.d
-    server = require '../lib/server'
+    server = require './server'
     server.listen argv.p, argv.h
     console.log "Concrete listening on port %d with host %s in directory %s".green,
         argv.p, argv.h, argv.d
 
 # check the path and start the git request
-git = require '../lib/git'
+git = require './git'
 git.init(argv._[0], startServer)

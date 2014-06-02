@@ -49,12 +49,12 @@
   startServer = function() {
     var server;
     global.currentNamespace = argv.d;
-    server = require('../lib/server');
+    server = require('./server');
     server.listen(argv.p, argv.h);
     return console.log("Concrete listening on port %d with host %s in directory %s".green, argv.p, argv.h, argv.d);
   };
 
-  git = require('../lib/git');
+  git = require('./git');
 
   git.init(argv._[0], startServer);
 

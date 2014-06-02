@@ -17,17 +17,17 @@ module.exports = (grunt) ->
         flatten: false
         cwd: 'src/'
         src: ['**/*.coffee','!views/**/*']
-        dest: 'lib/'
+        dest: 'dist/'
         ext: '.js'
 
       ui:
         files:
-          'lib/public/concrete.js': ['src/views/js/concrete.coffee']
+          'dist/public/concrete.js': ['src/views/js/concrete.coffee']
 
     stylus:
       compile:
         files:
-          'lib/public/stylesheets/app.css': ['src/views/stylesheets/app.styl']
+          'dist/public/stylesheets/app.css': ['src/views/stylesheets/app.styl']
 
     copy:
       statics:
@@ -36,12 +36,12 @@ module.exports = (grunt) ->
           flatten: false
           cwd: 'statics/'
           src: ['**/*']
-          dest: 'lib/public/'
+          dest: 'dist/public/'
         ]
       views:
         files:
-          'lib/views/index.coffee': ['src/views/index.coffee']
-          'lib/views/jobPartial.coffee': ['src/views/jobPartial.coffee']
+          'dist/views/index.coffee': ['src/views/index.coffee']
+          'dist/views/jobPartial.coffee': ['src/views/jobPartial.coffee']
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
