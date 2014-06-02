@@ -5,7 +5,7 @@ module.exports = (grunt) ->
     watch:
       coffee:
         files: ['src/**/*.coffee']
-        tasks: ['coffee:server']
+        tasks: ['coffee']
 
       stylus:
         files: ['src/views/stylesheets/app.styl']
@@ -19,6 +19,10 @@ module.exports = (grunt) ->
         src: ['**/*.coffee','!views/**/*']
         dest: 'lib/'
         ext: '.js'
+
+      ui:
+        files:
+          'lib/public/concrete.js': ['src/views/js/concrete.coffee']
 
     stylus:
       compile:
