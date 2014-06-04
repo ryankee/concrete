@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "description": "A minimalistic Continuous Integration server",
   "author": "Ryan Kee <me@ryankee.com> (http://ryankee.com)",
-  "preferGlobal" : true,
+  "preferGlobal": true,
   "keywords": [
     "coffeescript",
     "continuous integration",
@@ -13,9 +13,9 @@
   "bin": {
     "concrete": "./bin/concrete"
   },
-  "directories" : {
-    "bin" : "./bin",
-    "lib" : "./lib"
+  "directories": {
+    "bin": "./bin",
+    "lib": "./lib"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,14 @@
     "express-namespace": "*"
   },
   "engines": {
-    "node": ">=0.4.9"
+    "node": ">=0.10.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-coffee": "^0.10.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-stylus": "^0.16.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-jasmine-bundle": "^0.2.0"
   }
 }

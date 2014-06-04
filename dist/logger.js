@@ -1,5 +1,6 @@
 (function() {
   var Logger;
+
   Logger = module.exports = function(currentStream) {
     return {
       stream: currentStream != null ? currentStream : '',
@@ -8,4 +9,5 @@
       }
     };
   };
+
 }).call(this);

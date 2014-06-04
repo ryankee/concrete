@@ -1,12 +1,18 @@
 (function() {
-  var COLORS, colors, exec, git, html, jobs, mongo, parseSequence, runFile, runNextJob, runTask, runner, server, tokenize;
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  var COLORS, colors, exec, git, html, jobs, mongo, parseSequence, runFile, runNextJob, runTask, runner, server, tokenize, updateLog;
+
   colors = require('colors');
+
   git = require('./git');
+
   server = require('./server');
+
   exec = require('child_process').exec;
+
   mongo = require('mongodb');
+
   jobs = require('./jobs');
+
   parseSequence = function(input) {
     var length;
     length = input.length;
@@ -15,6 +21,7 @@
       args: input.substring(2, length - 1)
     };
   };
+
   tokenize = function(input, result) {
     if (result == null) {
       result = [];
@@ -27,6 +34,7 @@
     });
     return result;
   };
+
   COLORS = {
     0: '',
     1: 'bold',
@@ -49,6 +57,7 @@
     46: 'bg-cyan',
     47: 'bg-white'
   };
+
   html = function(input) {
     var result;
     result = input.map(function(v) {
@@ -66,11 +75,13 @@
     });
     return "<code><pre><span>" + (result.join('')) + "</span></pre></code>";
   };
+
   runner = module.exports = {
     build: function() {
       return runNextJob();
     }
   };
+
   runNextJob = function() {
     if (jobs.current != null) {
       return false;
@@ -85,49 +96,67 @@
       });
     });
   };
+
   runTask = function(next) {
     jobs.updateLog(jobs.current, "Executing '" + git.runner + "'");
     return exec(git.runner, {
       maxBuffer: 1024 * 1024
-    }, __bind(function(error, stdout, stderr) {
-      var err, out;
-      if (error != null) {
-        err = html(tokenize(error.toString()));
-        return jobs.updateLog(jobs.current, "<span class='output error'>" + err + "</span>", function() {
-          console.log(("" + err).red);
-          return runFile(git.failure, next, false);
-        });
-      } else {
-        out = html(tokenize(stdout.toString()));
-        return jobs.updateLog(jobs.current, "<span class='output'>" + out + "</span>", function() {
-          console.log(out);
-          return runFile(git.success, next, true);
-        });
-      }
-    }, this));
+    }, (function(_this) {
+      return function(error, stdout, stderr) {
+        if (error != null) {
+          return updateLog(error, true, function() {
+            return updateLog(stdout, true, function() {
+              return updateLog(stderr, true, function() {
+                return runFile(git.failure, next, false);
+              });
+            });
+          });
+        } else {
+          return updateLog(stdout, true, function() {
+            return runFile(git.success, next, true);
+          });
+        }
+      };
+    })(this));
   };
+
   runFile = function(file, next, args) {
     if (args == null) {
       args = null;
     }
     return jobs.updateLog(jobs.current, "Executing " + file, function() {
       console.log(("Executing " + file).grey);
-      return exec(file, __bind(function(error, stdout, stderr) {
-        var err, out;
-        if (error != null) {
-          err = html(tokenize(error.toString()));
-          return jobs.updateLog(jobs.current, "<span class='output error'>" + err + "</span>", function() {
-            next(args);
-            return console.log(("" + err).red);
-          });
-        } else {
-          out = html(tokenize(stdout.toString()));
-          return jobs.updateLog(jobs.current, "<span class='output'>" + out + "</span>", function() {
-            next(args);
-            return console.log(out);
-          });
-        }
-      }, this));
+      return exec(file, (function(_this) {
+        return function(error, stdout, stderr) {
+          if (error != null) {
+            return updateLog(error, true, function() {
+              return updateLog(stdout, true, function() {
+                return updateLog(stderr, true, function() {
+                  return next(args);
+                });
+              });
+            });
+          } else {
+            return updateLog(stdout, true, function() {
+              return next(args);
+            });
+          }
+        };
+      })(this));
     });
   };
+
+  updateLog = function(buffer, isError, done) {
+    var content, errorClass;
+    content = html(tokenize(buffer.toString()));
+    if (isError) {
+      errorClass = ' error';
+      console.log(("" + content).red);
+    } else {
+      errorClass = '';
+      console.log(content);
+    }
+    return jobs.updateLog(jobs.current, "<span class='output" + errorClass + "'>" + content + "</span>", done);
+  };
+
 }).call(this);

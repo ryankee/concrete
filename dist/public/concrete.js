@@ -14,8 +14,9 @@
       });
     };
     updateJob = function(job) {
-      url = $(job).find("a").attr("href");
-      return $.get(url, function(data) {
+      var id;
+      id = $(job).find('.job_id').first().html();
+      return $.get("/job/" + id, function(data) {
         $(job).find('.job_container').first().html(data.log);
         if (data.finished) {
           $(job).find('a img.loader').remove();
@@ -44,7 +45,7 @@
     jobTemplate = function() {
       return li('.job', function() {
         a({
-          href: baseUrl + "job/" + (this.job._id.toString())
+          href: "/job/" + (this.job._id.toString())
         }, function() {
           var d;
           d = new Date(this.job.addedTime);
@@ -78,8 +79,7 @@
       closeAll();
       $('button.build').hide();
       $('li.nojob').hide();
-      var url = $(this).closest("form").attr("action");
-      $.post(url, function(data) {
+      $.post('/', function(data) {
         var job;
         if ($('ul.jobs').find('li.nojob').length > 0) {
           $('ul.jobs').find('li.nojob').first().remove();
@@ -98,4 +98,5 @@
       return addClick(job);
     });
   });
+
 }).call(this);
