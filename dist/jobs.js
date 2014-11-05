@@ -5,7 +5,7 @@
 
   path = require('path');
 
-  dbName = path.basename(process.cwd()).replace(/\./, "-");
+  dbName = path.basename(process.cwd()).replace(/\./g, "-");
 
   db = new mongo.Db("concrete_" + dbName, new mongo.Server('localhost', mongo.Connection.DEFAULT_PORT, {
     auto_reconnect: true
