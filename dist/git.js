@@ -19,7 +19,7 @@
       pass: 'concrete.pass'
     },
     init: function(target, callback) {
-      var path;
+      var fs, path;
       readyCallback = callback;
       path = require('path');
       if (target.toString().charAt(0) !== '/') {
@@ -29,7 +29,8 @@
       git.target = path.normalize(target + '/.git/');
       git.failure = path.normalize(target + '/.git/hooks/build-failed');
       git.success = path.normalize(target + '/.git/hooks/build-worked');
-      return path.exists(git.target, function(exists) {
+      fs = require('fs');
+      return fs.exists(git.target, function(exists) {
         if (exists === false) {
           console.log(("'" + target + "' is not a valid Git repo").red);
           process.exit(1);
