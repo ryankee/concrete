@@ -36,8 +36,10 @@ git = module.exports =
         git.failure = path.normalize target+'/.git/hooks/build-failed'
         git.success = path.normalize target+'/.git/hooks/build-worked'
 
+        fs = require 'fs'
+
         # make sure the path exists and is a valid repo
-        path.exists git.target, (exists)->
+        fs.exists git.target, (exists)->
             if exists is no
                 console.log "'#{target}' is not a valid Git repo".red
                 process.exit 1
