@@ -28,7 +28,7 @@
     "express": "2.x",
     "stylus": "0.x",
     "coffeekup": "0.3.x",
-    "mongodb": "0.9.x",
+    "mongodb": "3.6.x",
     "express-namespace": "*"
   },
   "engines": {
